@@ -9,4 +9,6 @@ extern pthread_mutex_t count_mutex;
 extern float total_items_weight;
 extern pthread_mutex_t weight_mutex;
 
+extern const char* SOCK_PATH;
+
 #endif
