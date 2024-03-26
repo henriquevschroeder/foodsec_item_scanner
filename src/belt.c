@@ -24,6 +24,6 @@ void *belt_thread(void *arg)
       total_items_weight += belt_data->item_weight;
       pthread_mutex_unlock(&weight_mutex);
 
-      printf("Belt %d: added 1 item with %.2f kg\n", belt_data->id);
+      printf("Belt %d: added 1 item with %.2f kg\n", belt_data->id, belt_data->item_weight);
    }
 }
