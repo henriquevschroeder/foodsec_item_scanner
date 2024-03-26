@@ -50,7 +50,6 @@ aplicados no restante da avaliação da implementação. Todos os alunos poderã
 o professor poderá escolher um representante para apresentar o trabalho em nome do grupo.
 
 ## Descrição do projeto a ser desenvolvido
-Projeto 1
 Problemática: uma Indústria de Alimentos de Santa Catarina chamada FoodSec S.A. possui a
 tarefa de escanear alimentos por meio de câmeras e verificar se os mesmos estão corretos. Os
 alimentos podem passar por uma das três esteiras disponíveis. As três esteiras são controladas
@@ -58,6 +57,7 @@ por um por um único computador centralizado. Esse computador recebe dados de um
 em cada uma das esteiras que captura a contagem de itens que são identificados como
 seguros. A contagem é exibida em um display perto das esteiras (todos os displays são
 controlados pela mesma lógica, é apenas uma replicação).
+
 Diante disso, a empresa precisa que vocês implementem, por meio de aplicação para
 distribuição Linux/Windows, uma solução que consiga realizar as contagens nas três esteiras e
 exiba o resultado total (contagem esteira 1 + contagem esteira 2 + contagem esteira 3). A
@@ -65,10 +65,12 @@ empresa pede que seja simulado a solução em um sistema multicore com sistema o
 com suporte a threads e IPC. A empresa solicita que um processo seja responsável pela
 contagem usando threads e outro processo seja responsável pela apresentação no display.
 Você deve usar pipe para que os dois processos troquem dados.
+
 Além disso, os pesos dos itens que passam por cada uma das esteiras são armazenados em
 um único vetor de dados. A cada 1.500 unidades de produtos, das três esteiras, é necessário
 atualizar o peso total de itens processados. Sendo assim, a empresa aceita uma pausa na
 quantidade de itens sendo contados e pesados para realizar a pesagem total.
+
 A empresa também fornece uma análise das três esteiras:
 - Esteira 1: produtos de maior peso (5 Kg) – passa 1 item a cada segundo pelo sensor.
 - Esteira 2: produtos de peso médio (2 Kg) – passa 1 item a cada 0,5 segundo pelo sensor.
