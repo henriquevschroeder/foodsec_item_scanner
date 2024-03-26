@@ -2,12 +2,16 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
+#include "globals.h"
 #include "belt.h"
 #include "display.h"
 
 const int BELT_NUM = 3;
-int total_items_count = 0;
 float total_items_weight = 0.0;
+
+// Total items count
+int total_items_count = 0;
+pthread_mutex_t count_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 int main()
 {

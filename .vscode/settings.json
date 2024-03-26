@@ -3,6 +3,7 @@
       "*.embeddedhtml": "html",
       "display.h": "c",
       "belt.h": "c",
-      "pthread.h": "c"
+      "pthread.h": "c",
+      "globals.h": "c"
    }
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
+#include "globals.h"
 
 const int TWO_SECONDS_IN_MICROSECONDS = 2000000;
 
@@ -12,7 +13,7 @@ void *display_count_thread(void)
 	{
 		usleep(TWO_SECONDS_IN_MICROSECONDS);
 		pthread_mutex_lock(&screen_mutex);
-		printf("Display!\n");
+		printf("======= Display: %i =======\n", total_items_count);
 		pthread_mutex_unlock(&screen_mutex);
 	}
 }
