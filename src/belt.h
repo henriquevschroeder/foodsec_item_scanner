@@ -4,7 +4,6 @@
 typedef struct {
    int id;
    float item_weight;
-   float speed;
    int wait_time_in_microsseconds;
 } BeltData;
 

@@ -39,17 +39,14 @@ int main()
       {
          case 0:
             belt_data[i]->item_weight = 5.0; // weight in kg
-            belt_data[i]->speed = 1.0; // items per second
             belt_data[i]->wait_time_in_microsseconds = 1000000; // 1 second
             break;
          case 1:
             belt_data[i]->item_weight = 2.0; // weight in kg
-            belt_data[i]->speed = 2.0; // items per second (1 item every 0.5 second)
             belt_data[i]->wait_time_in_microsseconds = 500000; // 0.5 second
             break;
          case 2:
             belt_data[i]->item_weight = 0.5; // weight in kg
-            belt_data[i]->speed = 10.0; // items per second (1 item every 0.1 second)
             belt_data[i]->wait_time_in_microsseconds = 100000; // 0.1 second
             break;
       } 

@@ -8,8 +8,8 @@ void *belt_thread(void *arg)
 {
    BeltData *belt_data = (BeltData *)arg;
    printf(
-      "Belt %d | Item Weight = %.2f Kg | Speed = %.2f items/second | Wait Time %i\n",
-      belt_data->id, belt_data->item_weight, belt_data->speed, belt_data->wait_time_in_microsseconds
+      "Belt %d | Item Weight = %.2f Kg | Wait Time %i\n",
+      belt_data->id, belt_data->item_weight, belt_data->wait_time_in_microsseconds
    );
 
    while (1)
