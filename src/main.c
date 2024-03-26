@@ -33,10 +33,12 @@ int main()
 	}
    else if (pid == 0) // Child Process (Display)
    {
+      printf("[+] Initializing display client...\n");
       init_display_client();
    }
    else // Parent Process (Conveyor Belt threads)
    {
+      printf("[+] Initializing belt server...\n");
       init_belt_server();
    }
 
