@@ -7,11 +7,14 @@
 #include "display.h"
 
 const int BELT_NUM = 3;
-float total_items_weight = 0.0;
 
 // Total items count
 int total_items_count = 0;
 pthread_mutex_t count_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+// Total items weight
+float total_items_weight = 0.0;
+pthread_mutex_t weight_mutex = PTHREAD_MUTEX_INITIALIZER;;
 
 int main()
 {

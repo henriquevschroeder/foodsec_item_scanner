@@ -13,7 +13,10 @@ void *display_count_thread(void)
 	{
 		usleep(TWO_SECONDS_IN_MICROSECONDS);
 		pthread_mutex_lock(&screen_mutex);
-		printf("======= Display: %i =======\n", total_items_count);
+		printf("\n============== Display ==============\n");
+		printf("- Item Count: %i\n", total_items_count);
+		printf("- Total Weight: %.2f kg\n", total_items_weight);
+		printf("============== Display ==============\n\n");
 		pthread_mutex_unlock(&screen_mutex);
 	}
 }

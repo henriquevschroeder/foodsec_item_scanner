@@ -15,9 +15,15 @@ void *belt_thread(void *arg)
    while (1)
    {
       usleep(belt_data->wait_time_in_microsseconds);
+
       pthread_mutex_lock(&count_mutex);
       total_items_count += 1;
       pthread_mutex_unlock(&count_mutex);
-      printf("Belt %d: added 1 item\n", belt_data->id);
+
+      pthread_mutex_lock(&weight_mutex);
+      total_items_weight += belt_data->item_weight;
+      pthread_mutex_unlock(&weight_mutex);
+
+      printf("Belt %d: added 1 item with %.2f kg\n", belt_data->id);
    }
 }
