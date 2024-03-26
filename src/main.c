@@ -51,7 +51,7 @@ int main()
             break;
       } 
 
-      if (pthread_create(&threads[i], NULL, belt_thread, (void *)belt_data[i]) != 0)
+      if (pthread_create(&threads[i], &attr, belt_thread, (void *)belt_data[i]) != 0)
       {
          perror("Failed on pthread_create");
          exit(EXIT_FAILURE);
