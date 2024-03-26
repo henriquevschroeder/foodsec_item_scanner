@@ -14,6 +14,6 @@ void *belt_thread(void *arg)
    while (1)
    {
       usleep(belt_data->wait_time_in_microsseconds);
-      printf("Belt %d!", belt_data->id);
+      printf("Belt %d!\n", belt_data->id);
    }
 }
