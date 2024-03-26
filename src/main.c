@@ -27,14 +27,16 @@ int main()
    for (int i = 0; i < BELT_NUM; i++)
    {
       belt_data[i] = malloc(sizeof(BeltData));
-      if (belt_data[i] == NULL) {
+      if (belt_data[i] == NULL)
+      {
          perror("Failed to allocate memory for belt data");
          exit(EXIT_FAILURE);
       }
 
       // Initialize the belt data
       belt_data[i]->id = i;
-      switch (i) {
+      switch (i)
+      {
          case 0:
             belt_data[i]->item_weight = 5.0; // weight in kg
             belt_data[i]->speed = 1.0; // items per second
@@ -52,7 +54,8 @@ int main()
             break;
       } 
 
-      if (pthread_create(&threads[i], NULL, belt_thread, (void *)belt_data[i]) != 0) {
+      if (pthread_create(&threads[i], NULL, belt_thread, (void *)belt_data[i]) != 0)
+      {
          perror("Failed on pthread_create");
          exit(EXIT_FAILURE);
       }
