@@ -13,9 +13,10 @@ const int BELT_NUM = 3;
 void *belt_thread(void *arg)
 {
    BeltData *belt_data = (BeltData *)arg;
+   
    printf(
-      "Belt %d | Item Weight = %.2f Kg | Wait Time %i\n",
-      belt_data->id, belt_data->item_weight, belt_data->wait_time_in_microsseconds
+      "[+] Server: Initializing Belt %d | Weight='%.2f Kg' | Interval='%.2f' s\n",
+      belt_data->id, belt_data->item_weight, belt_data->wait_time_in_microsseconds / 1000000.0
    );
 
    while (1)
@@ -36,13 +37,13 @@ void *belt_thread(void *arg)
       // Write processed data back to client
       if (write(belt_data->newsockfd, buffer, strlen(buffer) + 1) < 0)
       {
-         perror("Failed to write in socket");
+         perror("[-] Failed to write in socket");
          close(belt_data->newsockfd);
          close(belt_data->sockfd);
          exit(EXIT_FAILURE);
       }
 
-      // printf("Belt %d: added 1 item with %.2f kg\n", belt_data->id, belt_data->item_weight);
+      printf("\nBelt %d: added 1 item with %.2f kg", belt_data->id, belt_data->item_weight);
    }
 }
 
@@ -55,7 +56,7 @@ void init_belt_server()
    sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
    if (sockfd < 0)
    {
-      perror("Server: Failed to create the socket");
+      perror("[-] Server: Failed to create the socket");
       exit(EXIT_FAILURE);
    }
 
@@ -67,17 +68,17 @@ void init_belt_server()
    len = strlen(local.sun_path) + sizeof(local.sun_family);
    if (bind(sockfd, (struct sockaddr *)&local, len) < 0)
    {
-      perror("Server: Failed to capture the socket");
+      perror("[-] Server: Failed to capture the socket");
       close(sockfd);
       exit(EXIT_FAILURE);
    }
 
-   printf("Server: Belt server listening on %s...\n", SOCK_PATH);
+   printf("[+] Server: Listening on %s...\n", SOCK_PATH);
 
    // Listen for connections
    if (listen(sockfd, 5) < 0)
    {
-      perror("Server: Failed to listen the socket");
+      perror("[-] Server: Failed to listen the socket");
       close(sockfd);
       exit(EXIT_FAILURE);
    }
@@ -88,7 +89,7 @@ void init_belt_server()
    newsockfd = accept(sockfd, (struct sockaddr *)&remote, &len);
    if (newsockfd < 0)
    {
-      perror("Server: Failed to accept connection");
+      perror("[-] Server: Failed to accept connection");
       close(sockfd);
        exit(EXIT_FAILURE);
    }
@@ -104,7 +105,7 @@ void init_belt_server()
       belt_data[i] = malloc(sizeof(BeltData));
       if (belt_data[i] == NULL)
       {
-         perror("Failed to allocate memory for belt data");
+         perror("[-] Failed to allocate memory for belt data");
          exit(EXIT_FAILURE);
       }
 
@@ -130,7 +131,7 @@ void init_belt_server()
 
       if (pthread_create(&threads[i], &attr, belt_thread, (void *)belt_data[i]) != 0)
       {
-         perror("Failed on pthread_create");
+         perror("[-] Failed on pthread_create");
          exit(EXIT_FAILURE);
       }
    }

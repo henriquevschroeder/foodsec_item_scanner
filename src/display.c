@@ -21,7 +21,7 @@ void init_display_client()
 	sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
 	if (sockfd < 0)
 	{
-		perror("Client: Failed to create the socket");
+		perror("[-] Client: Failed to create the socket");
 		exit(EXIT_FAILURE);
 	}
 
@@ -32,7 +32,7 @@ void init_display_client()
 	len = strlen(remote.sun_path) + sizeof(remote.sun_family);
 	if (connect(sockfd, (struct sockaddr *)&remote, len) < 0)
 	{
-		perror("Client: Failed when connecting to server");
+		perror("[-] Client: Failed when connecting to server");
 		close(sockfd);
 		exit(EXIT_FAILURE);
 	}
@@ -44,13 +44,13 @@ void init_display_client()
 
 		if (read(sockfd, buffer, sizeof(buffer)) < 0)
 		{
-			perror("Client: Failed to read from socket");
+			perror("[-] Client: Failed to read from socket");
 			close(sockfd);
 			exit(EXIT_FAILURE);
 		}
 		
-		printf("\n============== Display ==============\n");
+		printf("\n========== Display ==========\n");
 		printf("%s\n", buffer);
-		printf("============== Display ==============\n\n");
+		printf("=============================\n\n");
 	}
 }

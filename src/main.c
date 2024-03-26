@@ -28,7 +28,7 @@ int main()
 
    if (pid < 0) // Error
    {
-      perror("Failed to fork child process for the display");
+      perror("[-] Failed to fork child process for the display");
       exit(EXIT_FAILURE);
 	}
    else if (pid == 0) // Child Process (Display)
