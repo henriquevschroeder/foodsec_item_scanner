@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <string.h>
 #include <sys/un.h>
 #include "globals.h"
 
