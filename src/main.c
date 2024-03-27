@@ -25,12 +25,12 @@ pthread_mutex_t weight_mutex = PTHREAD_MUTEX_INITIALIZER;
 float *items_weight_vec;
 size_t vec_capacity = 1500;
 size_t vec_size = 0;
-// float items_weight_vec[1500];
 
 // Lock production for calculating total weight
 int lock_production = 0;
 
-void signal_handler(int signum) {
+void signal_handler(int signum)
+{
    printf("\n\n[+] Cleaning up...\n");
    free(items_weight_vec);
    unlink(SOCK_PATH);
@@ -38,7 +38,8 @@ void signal_handler(int signum) {
    exit(signum);
 }
 
-int main() {
+int main()
+{
    // Set up signal handling for graceful termination
    signal(SIGINT, signal_handler);
    signal(SIGTERM, signal_handler);
@@ -46,7 +47,8 @@ int main() {
    // Initial allocation for the items_weight_vec
    items_weight_vec = malloc(vec_capacity * sizeof(float));
    // Handle memory allocation failure
-   if (items_weight_vec == NULL) {
+   if (items_weight_vec == NULL)
+   {
       perror("[-] Failed to allocate items_weight_vec");
       exit(EXIT_FAILURE);
    }

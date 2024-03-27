@@ -138,7 +138,7 @@ void init_belt_server()
    {
       perror("[-] Server: Failed to accept connection");
       close(sockfd);
-       exit(EXIT_FAILURE);
+      exit(EXIT_FAILURE);
    }
 
    BeltData *belt_data[BELT_NUM];
