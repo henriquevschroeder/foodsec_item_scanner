@@ -16,6 +16,6 @@ extern float *items_weight_vec;
 extern size_t vec_capacity;
 extern size_t vec_size;
 
-extern int lock_production;
+extern int lock_counting_process;
 
 #endif

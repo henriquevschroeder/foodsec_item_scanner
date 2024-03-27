@@ -55,7 +55,7 @@ void *belt_thread(void *arg)
 
    while (1)
    {
-      while(lock_production == 1)
+      while(lock_counting_process == 1)
       {
          usleep(1000);
       }
@@ -67,9 +67,9 @@ void *belt_thread(void *arg)
       // Calculate total weight every 1500 items
       if (total_items_count % 1500 == 0)
       {
-         lock_production = 1;
+         lock_counting_process = 1;
          total_items_weight = calculate_total_weight();
-         lock_production = 0;
+         lock_counting_process = 0;
       }
       pthread_mutex_unlock(&count_mutex);
 

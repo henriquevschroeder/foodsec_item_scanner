@@ -27,7 +27,7 @@ size_t vec_capacity = 1500;
 size_t vec_size = 0;
 
 // Lock production for calculating total weight
-int lock_production = 0;
+int lock_counting_process = 0;
 
 void signal_handler(int signum)
 {
