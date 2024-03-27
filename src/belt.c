@@ -40,7 +40,7 @@ void *belt_thread(void *arg)
          perror("[-] Failed to write in socket");
          close(belt_data->newsockfd);
          close(belt_data->sockfd);
-         exit(EXIT_FAILURE);
+         pthread_exit(NULL);
       }
 
       printf("\nBelt %d: added 1 item with %.2f kg", belt_data->id, belt_data->item_weight);
