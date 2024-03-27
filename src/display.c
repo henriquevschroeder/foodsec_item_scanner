@@ -40,8 +40,6 @@ void init_display_client()
 	// Read data from server
 	while(1)
 	{
-		usleep(TWO_SECONDS_IN_MICROSECONDS);
-
 		if (read(sockfd, buffer, sizeof(buffer)) < 0)
 		{
 			perror("[-] Client: Failed to read from socket");
@@ -56,5 +54,7 @@ void init_display_client()
 		printf("\n========== Display ==========\n");
 		printf("%s\n", buffer);
 		printf("=============================\n\n");
+
+		usleep(TWO_SECONDS_IN_MICROSECONDS);
 	}
 }
