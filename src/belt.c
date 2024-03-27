@@ -142,4 +142,7 @@ void init_belt_server()
       pthread_join(threads[i], NULL);
       free(belt_data[i]);
    }
+
+   pthread_mutex_destroy(&count_mutex);
+   pthread_mutex_destroy(&weight_mutex);
 }

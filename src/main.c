@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <signal.h>
 #include "globals.h"
 #include "belt.h"
 #include "display.h"
@@ -20,9 +21,18 @@ pthread_mutex_t count_mutex = PTHREAD_MUTEX_INITIALIZER;
 float total_items_weight = 0.0;
 pthread_mutex_t weight_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-int main()
-{
-   // Fork a child process
+void signal_handler(int signum) {
+   printf("\n\n[+] Cleaning up...\n");
+   unlink(SOCK_PATH);
+   printf("[+] Exiting.\n");
+   exit(signum);
+}
+
+int main() {
+   // Set up signal handling for graceful termination
+   signal(SIGINT, signal_handler);
+   signal(SIGTERM, signal_handler);
+
    pid_t pid;
    pid = fork();
 
@@ -33,6 +43,10 @@ int main()
 	}
    else if (pid == 0) // Child Process (Display)
    {
+      // Reset signal handlers to default for the child process
+      signal(SIGINT, SIG_DFL);
+      signal(SIGTERM, SIG_DFL);
+
       printf("[+] Initializing display client...\n");
       init_display_client();
    }
