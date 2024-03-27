@@ -48,11 +48,6 @@ void *belt_thread(void *arg)
 {
    BeltData *belt_data = (BeltData *)arg;
    
-   printf(
-      "\n[+] Server: Initializing Belt %d | Weight='%.2f Kg' | Interval='%.2f' s\n",
-      belt_data->id, belt_data->item_weight, belt_data->wait_time_in_microsseconds / 1000000.0
-   );
-
    while (1)
    {
       while(lock_counting_process == 1)
@@ -175,6 +170,11 @@ void init_belt_server()
             belt_data[i]->wait_time_in_microsseconds = 100000; // 0.1 second
             break;
       } 
+
+      printf(
+         "\n[+] Server: Initializing Belt %d | Weight='%.2f Kg' | Interval='%.2f' s\n",
+         belt_data[i]->id, belt_data[i]->item_weight, belt_data[i]->wait_time_in_microsseconds / 1000000.0
+      );
 
       if (pthread_create(&threads[i], &attr, belt_thread, (void *)belt_data[i]) != 0)
       {
