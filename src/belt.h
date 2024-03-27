@@ -1,5 +1,5 @@
-#ifndef BELT_HEADER
-#define BELT_HEADER
+#ifndef BELT_H
+#define BELT_H
 
 typedef struct {
    int id;
