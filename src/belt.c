@@ -13,11 +13,35 @@ const int BELT_NUM = 3;
 float calculate_total_weight()
 {
    float total_weight = 0.0;
-   for (int i = 0; i < 1500; i++)
+   for (int i = 0; i < vec_capacity; i++)
    {
       total_weight += items_weight_vec[i];
    }
    return total_weight;
+}
+
+void add_weight(float weight)
+{
+   // Check if we need to increase the array size
+   if (vec_size == vec_capacity)
+   {
+      // Add capacity for the next 1500 elements
+      size_t new_capacity = vec_capacity + 1500;
+      float *new_ptr = realloc(items_weight_vec, new_capacity * sizeof(float));
+
+      // Handle memory allocation failure
+      if (new_ptr == NULL)
+      {
+         perror("[-] Failed to resize items_weight_vec");
+         exit(EXIT_FAILURE);
+      }
+
+      items_weight_vec = new_ptr;
+      vec_capacity = new_capacity;
+   }
+
+   // Add the new weight to the array
+   items_weight_vec[vec_size++] = weight;
 }
 
 void *belt_thread(void *arg)
@@ -50,7 +74,7 @@ void *belt_thread(void *arg)
       pthread_mutex_unlock(&count_mutex);
 
       pthread_mutex_lock(&weight_mutex);
-      items_weight_vec[total_items_count - 1] = belt_data->item_weight;
+      add_weight(belt_data->item_weight);
       pthread_mutex_unlock(&weight_mutex);
 
       sprintf(buffer, "Count: %d\nTotal Weight: %.2f", total_items_count, total_items_weight);
