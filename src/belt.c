@@ -21,8 +21,6 @@ void *belt_thread(void *arg)
 
    while (1)
    {
-      usleep(belt_data->wait_time_in_microsseconds);
-
       pthread_mutex_lock(&count_mutex);
       total_items_count += 1;
       pthread_mutex_unlock(&count_mutex);
@@ -44,6 +42,8 @@ void *belt_thread(void *arg)
       }
 
       printf("\nBelt %d: added 1 item with %.2f kg", belt_data->id, belt_data->item_weight);
+
+      usleep(belt_data->wait_time_in_microsseconds);
    }
 }
 
