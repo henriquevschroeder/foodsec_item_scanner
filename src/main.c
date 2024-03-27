@@ -21,6 +21,10 @@ pthread_mutex_t count_mutex = PTHREAD_MUTEX_INITIALIZER;
 float total_items_weight = 0.0;
 pthread_mutex_t weight_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+// Items weight
+float items_weight_vec[1500];
+int lock_production = 0;
+
 void signal_handler(int signum) {
    printf("\n\n[+] Cleaning up...\n");
    unlink(SOCK_PATH);

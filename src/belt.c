@@ -10,27 +10,50 @@
 
 const int BELT_NUM = 3;
 
+float calculate_total_weight()
+{
+   float total_weight = 0.0;
+   for (int i = 0; i < 1500; i++)
+   {
+      total_weight += items_weight_vec[i];
+   }
+   return total_weight;
+}
+
 void *belt_thread(void *arg)
 {
    BeltData *belt_data = (BeltData *)arg;
    
    printf(
-      "[+] Server: Initializing Belt %d | Weight='%.2f Kg' | Interval='%.2f' s\n",
+      "\n[+] Server: Initializing Belt %d | Weight='%.2f Kg' | Interval='%.2f' s\n",
       belt_data->id, belt_data->item_weight, belt_data->wait_time_in_microsseconds / 1000000.0
    );
 
    while (1)
    {
+      while(lock_production == 1)
+      {
+         usleep(1000);
+      }
+
+      char buffer[1024];
+
       pthread_mutex_lock(&count_mutex);
       total_items_count += 1;
+      // Calculate total weight every 1500 items
+      if (total_items_count % 1500 == 0)
+      {
+         lock_production = 1;
+         total_items_weight = calculate_total_weight();
+         lock_production = 0;
+      }
       pthread_mutex_unlock(&count_mutex);
 
       pthread_mutex_lock(&weight_mutex);
-      total_items_weight += belt_data->item_weight;
+      items_weight_vec[total_items_count - 1] = belt_data->item_weight;
       pthread_mutex_unlock(&weight_mutex);
 
-      char buffer[1024];
-      sprintf(buffer, "Count: %d\nWeight: %.2f", total_items_count, total_items_weight);
+      sprintf(buffer, "Count: %d\nTotal Weight: %.2f", total_items_count, total_items_weight);
 
       // Write processed data back to client
       if (write(belt_data->newsockfd, buffer, strlen(buffer) + 1) < 0)
@@ -41,7 +64,7 @@ void *belt_thread(void *arg)
          pthread_exit(NULL);
       }
 
-      printf("\nBelt %d: added 1 item with %.2f kg", belt_data->id, belt_data->item_weight);
+      printf("\n[+] Belt %d: added 1 item with %.2f kg", belt_data->id, belt_data->item_weight);
 
       usleep(belt_data->wait_time_in_microsseconds);
    }
