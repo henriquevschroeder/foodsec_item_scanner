@@ -49,7 +49,11 @@ void init_display_client()
 			close(sockfd);
 			exit(EXIT_FAILURE);
 		}
-		
+
+		// Clear screen
+		printf("\033[2J");
+		printf("\033[H");
+		// Print data
 		printf("\n========== Display ==========\n");
 		printf("%s\n", buffer);
 		printf("=============================\n\n");
