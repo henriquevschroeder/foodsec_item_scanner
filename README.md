@@ -3,6 +3,7 @@
 - Universidade do Vale do Itajaí
 - Disciplina: Sistemas Operacionais
 - Professor: Felipe Viel
+- Alunos: Henrique Valiati Schroeder e Arthur Felipe Carminati
 
 ## Descrição do projeto a ser desenvolvido
 Problemática: uma Indústria de Alimentos de Santa Catarina chamada FoodSec S.A. possui a
