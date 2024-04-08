@@ -4,6 +4,12 @@
       "display.h": "c",
       "belt.h": "c",
       "pthread.h": "c",
-      "globals.h": "c"
+      "globals.h": "c",
+      "types.h": "c",
+      "unistd.h": "c",
+      "socket.h": "c",
+      "stdio.h": "c",
+      "stdlib.h": "c",
+      "un.h": "c"
    }
 }
