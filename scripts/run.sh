@@ -1,1 +1,0 @@
-make clean && make && clear && ./program
