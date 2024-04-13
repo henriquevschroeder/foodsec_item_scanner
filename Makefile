@@ -6,7 +6,7 @@ all: pre_build main display
 
 $(shell mkdir -p $(DIST_DIR))
 
-pre_build:ß
+pre_build:
 	@echo "Checking and removing /tmp/foodsec_pip if it exists..."
 	@rm -f /tmp/foodsec_pip
 
